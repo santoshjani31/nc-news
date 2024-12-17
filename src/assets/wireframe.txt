@@ -1,0 +1,87 @@
+App (Parent Component)
+•	Header
+    o	Nav Links: Home | Topics | Post Article | Profile
+•	ArticleListPage (Homepage)  -- usesState: [articles, filterTopic, sortOption]
+    o	Fetches all articles from the API based on filterTopic and sortOption.
+    o	Displays list of articles.
+    o	ArticleCard (Child Component)
+        	Props: article
+        	Displays article title, topic, author, and votes.
+•	ArticleDetailPage  -- usesState: [article, comments]
+    o	Fetches article details and comments by article_id.
+    o	Displays article content (title, body, votes).
+    o	Displays list of comments.
+    o	CommentCard (Child Component)
+        	Props: comment
+        	Displays individual comment details (body, author, votes).
+    o	CommentForm (Child Component)  -- usesState: [body]
+        	Textarea for adding a comment.
+        	Submits a new comment to the API.
+        	Resets form input after submission.
+•	TopicPage  -- usesState: [topics]
+    o	Fetches articles for a specific topic.
+    o	Displays list of topic-related articles.
+•	UserProfilePage  -- usesState: [user]
+    o	Fetches user data (username, articles posted).
+    o	Displays profile details and user articles.
+•	PostArticlePage  -- usesState: [title, topic, author, body, article_img_url]
+    o	Form to post a new article.
+    o	Inputs: Title, Topic, Author, Body, Article_img_url
+    o	Submits new article to the API.
+
+Explanation of Components and useState Hooks
+1.	App:
+    •	Parent component holding all the routes and rendering the Header.
+2.	Header:
+    •	Contains navigation links to key pages: Home, Topics, Post Article, and User Profile.
+3.	ArticleListPage:
+    •	State: articles fetched from /api/articles.
+    •	Displays a list of ArticleCard components.
+4.	ArticleCard:
+    •	Stateless component.
+    •	Props: Receives article details like title, topic, author, and votes.
+5.	ArticleDetailPage:
+    •	State:
+    •	article for article details fetched from /api/articles/:article_id.
+    •	comments for comments fetched from /api/articles/:article_id/comments.
+    •	Contains:
+    •	CommentCard to display comments.
+    •	CommentForm to post new comments.
+6.	CommentForm:
+    •	State: body for the input form.
+    •	Submits a new comment via postComment API.
+7.	TopicPage:
+    •	State: topics for topic-specific articles fetched from /api/topics/:slug.
+8.	UserProfilePage:
+    •	State: user fetched from /api/users/:username.
+    •	Displays user information and their posted articles.
+9.	PostArticlePage:
+    •	State: title, topic, author, body and article_img_url for the form inputs.
+    •	Submits a new article to /api/articles.
+
+________________________________________
+Key States Across Components
+--------------------------------------------------------------------------------------
+Component         | useState Variables	    | Purpose
+--------------------------------------------------------------------------------------
+ArticleListPage   | articles                | Holds list of all articles.
+ArticleDetailPage | article, comments       | Holds article details and its comments.
+                  | filterTopic, sortOption |
+CommentForm       | body                    | Handles form input for adding comments.
+TopicPage         | topics                  | Holds articles filtered by topic.
+UserProfilePage   | user                    | Holds user data and their articles.
+PostArticlePage   | title, topic, author    | Handles form inputs for posting an article.
+                  | body, article_img_url   | 
+
+--------------------------------------------------------------------------------------------------------------------------------
+API Endpoint                            | Frontend Route        | Page/Component    | Purpose
+--------------------------------------------------------------------------------------------------------------------------------
+GET /api                                | /                     | Homepage          | Base route with article list.
+GET /api/topics                         | /topics/:slug         | TopicPage         | Shows articles filtered by topic.
+GET /api/articles                       | / or /articles        | ArticleListPage   | Fetches and displays all articles.
+GET /api/articles/:article_id           | /articles/:article_id | ArticleDetailPage | Displays a single article in detail.
+GET /api/articles/:article_id/comments  | /articles/:article_id | CommentList       | Fetches comments for the article.
+POST /api/articles/:article_id/comments | /articles/:article_id | CommentForm       | Allows posting a new comment.
+PATCH /api/articles/:article_id         | /articles/:article_id | VoteHandler       | Allows voting on an article.
+DELETE /api/comments/:comment_id        | /articles/:article_id | CommentCard       | Deletes a user’s comment.
+GET /api/users                          | /users/:username      | UserProfilePage   | Displays user-specific info and articles.
