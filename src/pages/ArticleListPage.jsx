@@ -20,6 +20,7 @@ const ArticleListPage = () => {
     };
     getArticles();
   }, []);
+
   if (loading) return <p>Loading articles ...</p>;
   if (error) return <p>{error}</p>;
   return (
