@@ -22,3 +22,9 @@ export const patchArticleVotes = (article_id, inc_votes) => {
     .patch(`${BASE_URL}/articles/${article_id}`, { inc_votes })
     .then((response) => response.data);
 };
+
+export const postComment = (article_id, body) =>
+  axios.post(`${BASE_URL}/articles/${article_id}/comments`, {
+    username: 'cooljmessy',
+    body,
+  });
