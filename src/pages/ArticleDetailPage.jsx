@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchArticleDetails, fetchArticleComments } from '../api';
+import {
+  fetchArticleDetails,
+  fetchArticleComments,
+  patchArticleVotes,
+} from '../api';
 import CommentCard from '../components/CommentCard';
 
 const ArticleDetailPage = () => {
@@ -9,6 +13,7 @@ const ArticleDetailPage = () => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [voteError, setVoteError] = useState(null);
 
   useEffect(() => {
     const getArticleData = async () => {
@@ -29,6 +34,25 @@ const ArticleDetailPage = () => {
     getArticleData();
   }, [article_id]);
 
+  const handleVote = async (inc_votes) => {
+    setVoteError(null); // Reset any previous error
+    setArticle((prev) => ({
+      ...prev,
+      votes: prev.votes + inc_votes, // Optimistic update
+    }));
+
+    try {
+      await patchArticleVotes(article_id, inc_votes);
+    } catch (err) {
+      setVoteError('Failed to update votes. Please try again.');
+      // Revert optimistic update
+      setArticle((prev) => ({
+        ...prev,
+        votes: prev.votes - inc_votes,
+      }));
+    }
+  };
+
   if (loading) return <p>Loading article...</p>;
   if (error) return <p>{error}</p>;
   if (!article) return <p>Article not found.</p>;
@@ -45,6 +69,16 @@ const ArticleDetailPage = () => {
       <p>Topic: {article.topic}</p>
       <p>Published: {new Date(article.created_at).toLocaleDateString()}</p>
       <p>{article.body}</p>
+      <div className='vote-section'>
+        <h3>Votes: {article.votes}</h3>
+        <button onClick={() => handleVote(1)} className='upvote-button'>
+          Upvote
+        </button>
+        <button onClick={() => handleVote(-1)} className='downvote-button'>
+          Downvote
+        </button>
+        {voteError && <p className='error-message'>{voteError}</p>}
+      </div>
       <section className='comments-section'>
         <h2>Comments:</h2>
         {comments.length > 0 ? (
