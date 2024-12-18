@@ -6,6 +6,7 @@ import {
   patchArticleVotes,
 } from '../api';
 import CommentCard from '../components/CommentCard';
+import CommentForm from '../components/CommentForm';
 
 const ArticleDetailPage = () => {
   const { article_id } = useParams();
@@ -88,6 +89,7 @@ const ArticleDetailPage = () => {
         ) : (
           <p>No comments yet. Be the first to comment!</p>
         )}
+        <CommentForm article_id={article_id} />
       </section>
     </main>
   );
