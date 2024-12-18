@@ -202,12 +202,37 @@ body {
   background-color: #0056b3;
 }
 
-/* .loading,
+.vote-section {
+  margin-top: 20px;
+}
+
+.vote-section h3 {
+  margin: 10px 0;
+}
+
+.upvote-button,
+.downvote-button {
+  margin: 5px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.upvote-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.downvote-button {
+  background-color: #f44336;
+  color: white;
+}
+
 .error-message {
-  text-align: center;
-  font-size: 1.2rem;
-  color: #d9534f;
-} */
+  color: red;
+  margin-top: 10px;
+}
 
 .footer {
   text-align: center;
