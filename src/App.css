@@ -57,8 +57,34 @@ body {
   text-decoration: underline;
 }
 
-/* Filter and Sort Buttons  */
+/* Basic styling for the Topics dropdown */
+.topics-dropdown {
+  position: relative;
+  cursor: pointer;
+}
 
+.dropdown-menu {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  position: absolute;
+  top: 100%; /* Positions it below the "Topics" button */
+  left: 0;
+  z-index: 100;
+  min-width: 100px;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f0f0f0;
+}
+
+/* Filter and Sort Buttons */
 .filter-sort-container {
   display: flex;
   justify-content: center;
@@ -83,13 +109,24 @@ body {
 }
 
 /* Article List Page */
-
 .articles-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 20px;
   justify-items: center;
+  padding: 20px;
 }
+
+/* .articles-page {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fdfdfd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+} */
 
 .article-card {
   background-color: #fff;
@@ -112,7 +149,7 @@ body {
   margin: 10px 0;
 }
 
-/* ArticleDetailPage */
+/* Article Detail Page */
 .article-detail-page {
   font-family: Arial, sans-serif;
   max-width: 800px;
@@ -134,7 +171,7 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   color: #555;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .article-image {
@@ -166,8 +203,28 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
+.comment-card button {
+  margin: 5px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #f44336;
+}
+
+.comment-card button:hover {
+  background-color: #ac2f26;
+  transition: background-color 0.3s ease;
+}
+
 .comment-card p {
   margin: 5px 0;
+}
+
+.comment-card button {
+  background-color: #f44336;
+  color: white;
+  transition: background-color 0.3s ease;
 }
 
 .comment-form {
@@ -177,13 +234,13 @@ body {
 }
 
 .comment-input {
-  width: 100%; /* Adjusts the width to match the layout */
+  width: 100%;
   padding: 0.75rem;
-  margin-bottom: 1rem; /* Spacing between input and button */
+  margin-bottom: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 1rem;
-  box-sizing: border-box; /* Ensures padding doesn't overflow */
+  box-sizing: border-box;
 }
 
 .comment-form button {
@@ -210,9 +267,7 @@ body {
   margin: 10px 0;
 }
 
-.upvote-button,
-.downvote-button,
-.delete-button {
+.vote-section button {
   margin: 5px;
   padding: 8px 12px;
   border: none;
@@ -225,10 +280,20 @@ body {
   color: white;
 }
 
-.downvote-button,
-.delete-button {
+.downvote-button {
   background-color: #f44336;
   color: white;
+  transition: background-color 0.3s ease;
+}
+
+.vote-section .downvote-button:hover {
+  background-color: #ac2f26;
+  transition: background-color 0.3s ease;
+}
+
+.vote-section .upvote-button:hover {
+  background-color: #2f6b31;
+  transition: background-color 0.3s ease;
 }
 
 .error-message {
@@ -236,6 +301,7 @@ body {
   margin-top: 10px;
 }
 
+/* Footer */
 .footer {
   text-align: center;
   margin-top: 30px;
