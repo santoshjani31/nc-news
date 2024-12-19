@@ -14,7 +14,7 @@ export const fetchArticleDetails = (article_id) =>
 
 export const fetchArticleComments = (article_id) =>
   axios.get(`${BASE_URL}/articles/${article_id}/comments`).then((response) => {
-    return response.data.comments;
+    return response.data;
   });
 
 export const patchArticleVotes = (article_id, inc_votes) =>

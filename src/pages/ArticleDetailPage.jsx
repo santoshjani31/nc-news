@@ -25,7 +25,7 @@ const ArticleDetailPage = () => {
         setArticle(articleData.articles);
         // Fetch comments separately
         const commentsData = await fetchArticleComments(article_id);
-        setComments(commentsData);
+        setComments(commentsData.comments);
       } catch (err) {
         setError('Failed to load article or comments. Please try again later.');
       } finally {

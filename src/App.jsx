@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route path='/' element={<ArticleListPage />} />
           <Route path='/articles/:article_id' element={<ArticleDetailPage />} />
-          <Route path='/topics' element={<TopicPage />} />
+          <Route path='/topics/:slug' element={<TopicPage />} />
           <Route path='/post-article' element={<PostArticlePage />} />
           <Route path='/profile' element={<UserProfilePage />} />
         </Routes>
