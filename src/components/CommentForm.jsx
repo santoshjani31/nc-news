@@ -19,7 +19,7 @@ const CommentForm = ({ article_id }) => {
 
     try {
       const response = await postComment(article_id, body);
-      console.log(response);
+
       if (response.status === 201) {
         setSuccessMessage('Comment posted successfully!');
         setBody('');
