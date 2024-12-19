@@ -17,14 +17,18 @@ export const fetchArticleComments = (article_id) =>
     return response.data.comments;
   });
 
-export const patchArticleVotes = (article_id, inc_votes) => {
-  return axios
+export const patchArticleVotes = (article_id, inc_votes) =>
+  axios
     .patch(`${BASE_URL}/articles/${article_id}`, { inc_votes })
     .then((response) => response.data);
-};
 
 export const postComment = (article_id, body) =>
   axios.post(`${BASE_URL}/articles/${article_id}/comments`, {
     username: 'cooljmessy',
     body,
   });
+
+export const deleteComment = (comment_id) =>
+  axios
+    .delete(`${BASE_URL}/comments/${comment_id}`)
+    .then((response) => response.data);

@@ -4,6 +4,7 @@ import {
   fetchArticleDetails,
   fetchArticleComments,
   patchArticleVotes,
+  deleteComment,
 } from '../api';
 import CommentCard from '../components/CommentCard';
 import CommentForm from '../components/CommentForm';
@@ -34,6 +35,22 @@ const ArticleDetailPage = () => {
 
     getArticleData();
   }, [article_id]);
+
+  const handleDeleteComment = async (comment_id) => {
+    try {
+      // Optimistically update the UI by removing the comment immediately
+      setComments((prevComments) =>
+        prevComments.filter((comment) => comment.comment_id !== comment_id)
+      );
+
+      // Make the API request to delete the comment
+      await deleteComment(comment_id);
+    } catch (err) {
+      setError('Failed to delete comment. Please try again later.');
+      // Re-add the comment if deletion fails
+      setComments((prevComments) => [...prevComments]);
+    }
+  };
 
   const handleVote = async (inc_votes) => {
     setVoteError(null); // Reset any previous error
@@ -84,7 +101,11 @@ const ArticleDetailPage = () => {
         <h2>Comments:</h2>
         {comments.length > 0 ? (
           comments.map((comment) => (
-            <CommentCard key={comment.comment_id} comment={comment} />
+            <CommentCard
+              key={comment.comment_id}
+              comment={comment}
+              onDelete={handleDeleteComment}
+            />
           ))
         ) : (
           <p>No comments yet. Be the first to comment!</p>
