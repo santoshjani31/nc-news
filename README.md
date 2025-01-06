@@ -149,7 +149,7 @@ The front end of the app is hosted on Netlify. You can access the live app [here
 
 ### Back End
 
-The back end API is hosted on Render. Check the documentation [here](#).
+The back end API is hosted on Render. Check the documentation [here](https://github.com/santoshjani31/be-my-nc-news).
 
 ## Planned Enhancements
 
